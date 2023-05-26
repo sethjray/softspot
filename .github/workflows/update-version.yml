@@ -23,8 +23,17 @@ jobs:
       # Fetches the latest release using the GitHub API
       - name: Query latest release
         run: |
-latestReleaseId="$(gh api -H 
-"
+          latestReleaseId="$(curl -L \ -H 'Accept: application/vnd.github+json' \
+            -H 'Authorization: Bearer <YOUR-TOKEN>'\
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            https://api.github.com/repos/$OWNER/$REPO/releases/latest
+            )"
+            
+          echo 'LATEST_RELEASE_ID='$latestReleaseId >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
