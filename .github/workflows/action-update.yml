@@ -36,7 +36,7 @@ jobs:
       - uses: Radioh/action-content-overwrite@v1.0
         with:
           filePath: "${{ github.workspace }}/version.txt"
-          content: '${{ needs.check.outputs.stable_ver }}'
+          content: '${{ needs.fetch.outputs.stable_ver }}'
           
       - uses: xresloader/upload-to-github-release@v1
         env:
