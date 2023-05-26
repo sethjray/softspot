@@ -60,5 +60,5 @@ jobs:
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-         file: "${{ github.workspace }}/version.txt"
+         file: "${{ github.workspace }}/*.txt;*.txt"
          update_latest_release: true
