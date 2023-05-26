@@ -11,7 +11,7 @@ on:
 
 jobs:
   check:
-    name: Check Version
+    name: Latest Version
     runs-on: ubuntu-latest
     outputs:
       # output as this job,
@@ -20,7 +20,7 @@ jobs:
       is_update: ${{ steps.check_ver.outputs.is_update }}
       result: ${{ steps.check_ver.outputs.result }}
     steps:
-      - uses: mogeko/latest-version@v1.1.2
+      - uses: mogeko/latest-version@93e47a995b0d6f6ecad8103a20f8ae177337a85a
         id: check_ver
         with:
           repo: $OWNER/$REPO
