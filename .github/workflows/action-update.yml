@@ -5,7 +5,8 @@ run-name: ${{ github.actor }} is updating version.txt for latest release
 on:
    # Triggers the workflow on release
   release:
-    types: [released]
+    types:
+      - released
   workflow_dispatch: # Allow manual trigger workflows
 
 jobs:
