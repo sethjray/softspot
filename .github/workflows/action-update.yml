@@ -52,5 +52,4 @@ jobs:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
          file: "version.txt"
-         tags: true
          update_latest_release: true
