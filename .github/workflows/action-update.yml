@@ -47,3 +47,4 @@ jobs:
         with:
          file: "${{ github.workspace }}/version.txt;"
          update_latest_release: true
+         overwrite: true
