@@ -41,20 +41,20 @@ jobs:
           echo '${{ needs.check.outputs.is_update }}'
           echo '${{ needs.check.outputs.result }}' | jq '.'
           
-  update:
-    name: Update Version File
-    runs-on: ubuntu-latest
-    needs: fetch
-    steps:
-      - uses: Radioh/action-content-overwrite@v1.0
-        with:
-          filePath: "./version.txt"
-          content: '${{ needs.check.outputs.stable_ver }}'
+#   update:
+#     name: Update Version File
+#     runs-on: ubuntu-latest
+#     needs: fetch
+#     steps:
+#       - uses: Radioh/action-content-overwrite@v1.0
+#         with:
+#           filePath: "./version.txt"
+#           content: '${{ needs.check.outputs.stable_ver }}'
           
   upload:
    name: Upload To Release
    runs-on: ubuntu-latest
-   needs: update
+   needs: checkout
    steps:
       - uses: xresloader/upload-to-github-release@v1
         env:
