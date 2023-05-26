@@ -28,7 +28,7 @@ jobs:
             https://api.github.com/repos/$OWNER/$REPO/releases/latest
             )"
             
-          echo 'LATEST_RELEASE_ID='$latestReleaseId >> $GITHUB_ENV
+          echo 'LATEST_RELEASE_ID='$latestReleaseId
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
