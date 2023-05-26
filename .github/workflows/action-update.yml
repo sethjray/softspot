@@ -21,9 +21,19 @@ jobs:
         id: check_ver
         with:
           repo: sethjray/softspot
+  update:
+    name: Update Version File
+    runs-on: ubuntu-latest
+    needs: fetch
+    steps:
+      - uses: Radioh/action-content-overwrite@v1.0
+        with:
+          filePath: "${{ github.workspace }}/version.txt"
+          content: '${{ needs.check.outputs.stable_ver }}'
   update-release:
     name: Update Relase Version File
     runs-on: ubuntu-latest
+    needs: fetch
     steps:
       - uses: actions/checkout@v3
       - name: "Find env"
@@ -35,5 +45,5 @@ jobs:
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-         file: "${{ github.workspace }}/*.txt;"
+         file: "${{ github.workspace }}/version.txt;"
          update_latest_release: true
