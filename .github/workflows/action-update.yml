@@ -9,8 +9,8 @@ on:
   workflow_dispatch: # Allow manual trigger workflows
 
 jobs:
-  check:
-    name: Latest Version
+  fetch:
+    name: Fetch Version Info
     runs-on: ubuntu-latest
     outputs:
       stable_ver: ${{ steps.check_ver.outputs.stable_ver }}
@@ -23,9 +23,9 @@ jobs:
           repo: sethjray/softspot
 
   print: # Just for show the output
-    name: Print the result from check
+    name: Print Info
     runs-on: ubuntu-latest
-    needs: check
+    needs: fetch
     steps:
       - run: |
           echo '${{ needs.check.outputs.stable_ver }}'
@@ -33,9 +33,24 @@ jobs:
           echo '${{ needs.check.outputs.result }}' | jq '.'
           
   update:
+    name: Update Version File
     runs-on: ubuntu-latest
+    needs: fetch
     steps:
       - uses: Radioh/action-content-overwrite@v1.0
         with:
           filePath: "./version.txt"
           content: '${{ needs.check.outputs.stable_ver }}'
+          
+  upload:
+   name: Upload To Release
+   runs-on: ubuntu-latest
+   needs: update
+   steps:
+      - uses: xresloader/upload-to-github-release@v1
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+         file: "version.txt"
+         tags: true
+         update_latest_release: true
