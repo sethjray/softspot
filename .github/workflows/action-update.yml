@@ -23,11 +23,7 @@ jobs:
       - uses: mogeko/latest-version@93e47a995b0d6f6ecad8103a20f8ae177337a85a
         id: check_ver
         with:
-          repo: $OWNER/$REPO
-        env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              OWNER: ${{ github.repository_owner }}
-              REPO: ${{ github.event.repository.name }}
+          repo: sethjray/softspot
 
   print: # Just for show the output
     name: Print the result from check
