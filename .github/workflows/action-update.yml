@@ -13,8 +13,6 @@ jobs:
     name: Latest Version
     runs-on: ubuntu-latest
     outputs:
-      # output as this job,
-      # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs
       stable_ver: ${{ steps.check_ver.outputs.stable_ver }}
       is_update: ${{ steps.check_ver.outputs.is_update }}
       result: ${{ steps.check_ver.outputs.result }}
@@ -37,8 +35,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: wow-actions/update-file@v1.2.0
+      - uses: Radioh/action-content-overwrite@v1.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          path: version.txt
+          filePath: "./version.txt"
           content: '${{ needs.check.outputs.stable_ver }}'
