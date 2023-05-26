@@ -7,7 +7,6 @@ on:
   release:
     types: [released]
   workflow_dispatch: # Allow manual trigger workflows
-  pull_request:
 
 jobs:
   check:
@@ -34,3 +33,12 @@ jobs:
           echo '${{ needs.check.outputs.stable_ver }}'
           echo '${{ needs.check.outputs.is_update }}'
           echo '${{ needs.check.outputs.result }}' | jq '.'
+          
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wow-actions/update-file@v1.2.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: version.txt
+          content: '${{ needs.check.outputs.stable_ver }}'
