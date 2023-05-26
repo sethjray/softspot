@@ -6,7 +6,6 @@ on:
    # Triggers the workflow on release
   release:
     types: [released]
-  push:
   workflow_dispatch: # Allow manual trigger workflows
 
 jobs:
