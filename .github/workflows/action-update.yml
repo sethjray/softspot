@@ -20,7 +20,7 @@ jobs:
       is_update: ${{ steps.check_ver.outputs.is_update }}
       result: ${{ steps.check_ver.outputs.result }}
     steps:
-      - uses: mogeko/latest-version@v1
+      - uses: mogeko/latest-version@v1.1.2
         id: check_ver
         with:
           repo: $OWNER/$REPO
