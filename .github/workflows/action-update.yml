@@ -32,31 +32,8 @@ jobs:
           zip -r pkg.zip *.txt
           
       - uses: xresloader/upload-to-github-release@v1
-      - name: "Upload file"
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
          file: "${{ github.workspace }}/*.txt;*.txt"
          update_latest_release: true
-
-  print: # Just for show the output
-    name: Print Info
-    runs-on: ubuntu-latest
-    needs: fetch
-    steps:
-      - run: |
-          echo '${{ needs.check.outputs.stable_ver }}'
-          echo '${{ needs.check.outputs.is_update }}'
-          echo '${{ needs.check.outputs.result }}' | jq '.'
-          
-#   update:
-#     name: Update Version File
-#     runs-on: ubuntu-latest
-#     needs: fetch
-#     steps:
-#       - uses: Radioh/action-content-overwrite@v1.0
-#         with:
-#           filePath: "./version.txt"
-#           content: '${{ needs.check.outputs.stable_ver }}'
-    
-      
