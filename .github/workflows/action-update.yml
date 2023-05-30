@@ -12,6 +12,10 @@ jobs:
   fetch:
     name: Fetch Version Info
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     outputs:
       stable_ver: ${{ steps.check_ver.outputs.stable_ver }}
       is_update: ${{ steps.check_ver.outputs.is_update }}
