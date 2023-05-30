@@ -45,3 +45,13 @@ jobs:
          file: "${{ github.workspace }}/version.txt;"
          update_latest_release: true
          overwrite: true
+         
+      - name: GIT commit and push all changed files
+        env: 
+          CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+          CI_COMMIT_AUTHOR: Continuous Integration
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "seth.ray@datalogic.com"
+          git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
